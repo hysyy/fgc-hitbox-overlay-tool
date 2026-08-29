@@ -1,0 +1,218 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #1a1a1e;
+  color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+header {
+  background-color: #25252b;
+  padding: 12px 20px;
+  border-bottom: 1px solid #33333d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Container to group the icon and text */
+.header-title-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Header icon styling */
+.header-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+}
+
+h1 {
+  font-size: 1.2rem;
+  color: #00d2ff;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 50px);
+}
+
+.sidebar {
+  width: 380px;
+  background-color: #202026;
+  border-right: 1px solid #33333d;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+}
+
+.panel {
+  background: #2a2a32;
+  border-radius: 6px;
+  padding: 12px;
+  border: 1px solid #3d3d4a;
+}
+
+.panel h2 {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.p1-title { color: #4da6ff; }
+.p2-title { color: #ff5252; }
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+label {
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+input[type="file"] {
+  background: #18181c;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  width: 100%;
+}
+
+.controls-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* Wrapper to align the number input and % sign properly */
+.scale-input-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+input[type="number"] {
+  width: 55px;
+  background: #18181c;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 4px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+input[type="range"] {
+  flex: 1;
+}
+
+button {
+  background: #3a3a48;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #4a4a5a;
+}
+
+.frame-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #19191f;
+  padding: 6px 10px;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.workspace {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: #121214;
+}
+
+.canvas-toolbar {
+  background-color: #1a1a20;
+  padding: 8px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border-bottom: 1px solid #2a2a30;
+}
+
+.canvas-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: default;
+}
+
+.hint {
+  font-size: 0.75rem;
+  color: #888;
+  line-height: 1.3;
+}
+
+.scale-box {
+  background: #1d1d24;
+  padding: 8px;
+  border-radius: 4px;
+  margin-top: 6px;
+  border: 1px solid #333;
+}
+
+.sidebar-github-link {
+  margin-top: auto; /* Pushes the button to the bottom if sidebar expands */
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  gap: 10px;
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 10px;
+  width: 40px;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.sidebar-github-link:hover {
+  color: #ffffff;
+}

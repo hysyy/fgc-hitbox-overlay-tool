@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FGC Hitbox Overlay Tool</title>
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=2">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-title-container">
+		<img src="favicon-32x32.png?v=2" alt="Logo" class="header-icon">
+		<h1>FGC Hitbox Overlay Tool</h1>
+	</div>
+  </header>
+
+  <div class="container">
+    <div class="sidebar">
+
+      <div class="panel">
+        <h2 class="p1-title">Base Layer</h2>
+        <div class="input-group">
+          <label for="p1Files">Select Image File(s) (supports multi-frame hitboxes):</label>
+          <input type="file" id="p1Files" multiple accept="image/*">
+        </div>
+        
+        <div class="frame-stepper">
+          <button id="p1PrevFrame">&lt; Prev</button>
+          <span id="p1FrameLabel">Image: 0 / 0</span>
+          <button id="p1NextFrame">Next &gt;</button>
+        </div>
+        
+		<!-- Base Layer Scale Box -->
+		<div class="scale-box">
+		  <label style="font-weight:bold;">Image Scale:</label>
+		  <div class="controls-row">
+			<input type="range" id="p1ScaleSlider" min="10" max="300" value="100">
+			<div class="scale-input-wrapper">
+			  <input type="number" id="p1ScaleInput" value="100">
+			  <span>%</span>
+			</div>
+			<button id="p1ResetScale">Reset</button>
+		  </div>
+		</div>
+
+        <div class="controls-row">
+          <label for="p1Opacity">Opacity:</label>
+          <input type="range" id="p1Opacity" min="0" max="1" step="0.05" value="1">
+          <button id="p1ToggleVis">Hide</button>
+        </div>
+        <div class="controls-row">
+          <label>Flip:</label>
+          <button id="p1Flip">Flip Horizontally</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="p2-title">Overlay Layer</h2>
+        <div class="input-group">
+          <label for="p2Files">Select Image File(s) (supports multi-frame hitboxes):</label>
+          <input type="file" id="p2Files" multiple accept="image/*">
+        </div>
+
+        <div class="frame-stepper">
+          <button id="p2PrevFrame">&lt; Prev</button>
+          <span id="p2FrameLabel">Image: 0 / 0</span>
+          <button id="p2NextFrame">Next &gt;</button>
+        </div>
+
+        <!-- Overlay Layer Scale Box -->
+		<div class="scale-box">
+		  <label style="font-weight:bold;">Image Scale:</label>
+		  <div class="controls-row">
+			<input type="range" id="p2ScaleSlider" min="10" max="300" value="100">
+			<div class="scale-input-wrapper">
+			  <input type="number" id="p2ScaleInput" value="100">
+			  <span>%</span>
+			</div>
+			<button id="p2ResetScale">Reset</button>
+		  </div>
+		  <button id="matchP1WidthBtn" style="margin-top: 6px; width: 100%;">Match Base Layer Width</button>
+		</div>
+
+        <div class="controls-row">
+          <label for="p2Opacity">Opacity:</label>
+          <input type="range" id="p2Opacity" min="0" max="1" step="0.05" value="0.6">
+          <button id="p2ToggleVis">Hide</button>
+        </div>
+        <div class="controls-row">
+          <label>Flip:</label>
+          <button id="p2Flip">Flip Horizontally</button>
+        </div>
+
+        <hr style="border-color: #333; margin: 10px 0;">
+        <label style="font-weight:bold;">Manual Nudge (Overlay Layer):</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 4px;">
+          <button id="nudgeLeft">← Left</button>
+          <button id="nudgeRight">Right →</button>
+          <button id="nudgeUp">↑ Up</button>
+          <button id="nudgeDown">Down ↓</button>
+        </div>
+      </div>
+	  
+	  <a href="https://github.com/hysyy" target="_blank" rel="noopener noreferrer" class="sidebar-github-link">
+		<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+			<path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+		</svg>
+		<!-- <span>GitHub</span> -->
+	  </a>
+
+    </div>
+
+    <div class="workspace">
+	    <div class="canvas-toolbar">
+		  <button id="resetViewBtn">Reset Everything</button>
+		  <button id="savePngBtn" style="background-color: #0088cc; font-weight: bold;">Save Image</button>
+		  <span class="hint">Click & Drag Image to move | Drag Background to Pan | Scroll Wheel to Zoom</span>
+		</div>
+      <div class="canvas-container" id="canvasContainer">
+        <canvas id="mainCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
