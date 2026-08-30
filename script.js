@@ -196,37 +196,7 @@ document.getElementById('nudgeRight').addEventListener('click', () => { p2.x += 
 document.getElementById('nudgeUp').addEventListener('click', () => { p2.y -= 1; draw(); });
 document.getElementById('nudgeDown').addEventListener('click', () => { p2.y += 1; draw(); });
 
-container.addEventListener('mousedown', e => {
-  const rect = canvas.getBoundingClientRect();
-  const mouseX = e.clientX - rect.left;
-  const mouseY = e.clientY - rect.top;
-
-  const worldX = (mouseX - panX) / zoom;
-  const worldY = (mouseY - panY) / zoom;
-
-  if (isPointInLayer(worldX, worldY, p2)) {
-    dragMode = 'p2';
-    dragStartX = mouseX;
-    dragStartY = mouseY;
-    initialObjX = p2.x;
-    initialObjY = p2.y;
-    canvas.style.cursor = 'grabbing';
-  } else if (isPointInLayer(worldX, worldY, p1)) {
-    dragMode = 'p1';
-    dragStartX = mouseX;
-    dragStartY = mouseY;
-    initialObjX = p1.x;
-    initialObjY = p1.y;
-    canvas.style.cursor = 'grabbing';
-  } else {
-    dragMode = 'pan';
-    dragStartX = e.clientX - panX;
-    dragStartY = e.clientY - panY;
-    canvas.style.cursor = 'grabbing';
-  }
-});
-
-window.addEventListener('mousemove', e => {
+function updatePointerDrag(e) {
   const rect = canvas.getBoundingClientRect();
   const mouseX = e.clientX - rect.left;
   const mouseY = e.clientY - rect.top;
@@ -259,11 +229,47 @@ window.addEventListener('mousemove', e => {
   }
 
   draw();
+}
+
+container.addEventListener('pointerdown', e => {
+  const rect = canvas.getBoundingClientRect();
+  const mouseX = e.clientX - rect.left;
+  const mouseY = e.clientY - rect.top;
+
+  const worldX = (mouseX - panX) / zoom;
+  const worldY = (mouseY - panY) / zoom;
+
+  if (isPointInLayer(worldX, worldY, p2)) {
+    dragMode = 'p2';
+    dragStartX = mouseX;
+    dragStartY = mouseY;
+    initialObjX = p2.x;
+    initialObjY = p2.y;
+    canvas.style.cursor = 'grabbing';
+  } else if (isPointInLayer(worldX, worldY, p1)) {
+    dragMode = 'p1';
+    dragStartX = mouseX;
+    dragStartY = mouseY;
+    initialObjX = p1.x;
+    initialObjY = p1.y;
+    canvas.style.cursor = 'grabbing';
+  } else {
+    dragMode = 'pan';
+    dragStartX = e.clientX - panX;
+    dragStartY = e.clientY - panY;
+    canvas.style.cursor = 'grabbing';
+  }
 });
 
-window.addEventListener('mouseup', () => {
+window.addEventListener('pointermove', updatePointerDrag);
+window.addEventListener('pointerup', () => {
   dragMode = null;
   canvas.style.cursor = 'default';
+});
+window.addEventListener('pointerleave', () => {
+  if (!dragMode) {
+    canvas.style.cursor = 'default';
+  }
 });
 
 container.addEventListener('wheel', e => {
@@ -271,6 +277,28 @@ container.addEventListener('wheel', e => {
   zoom *= (e.deltaY < 0 ? 1.1 : 0.9);
   draw();
 });
+
+const mobileSidebarToggle = document.getElementById('mobileSidebarToggle');
+const appContainer = document.querySelector('.container');
+
+function setMobileSidebarState(isCollapsed) {
+  if (!appContainer || !mobileSidebarToggle) return;
+  appContainer.classList.toggle('sidebar-collapsed', isCollapsed);
+  mobileSidebarToggle.setAttribute('aria-expanded', String(!isCollapsed));
+}
+
+if (mobileSidebarToggle && appContainer) {
+  mobileSidebarToggle.addEventListener('click', () => {
+    const isCollapsed = !appContainer.classList.contains('sidebar-collapsed');
+    setMobileSidebarState(isCollapsed);
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) {
+      setMobileSidebarState(false);
+    }
+  });
+}
 
 document.getElementById('resetViewBtn').addEventListener('click', resetAll);
 

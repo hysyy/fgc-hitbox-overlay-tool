@@ -10,17 +10,44 @@ body {
   color: #e0e0e0;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
   height: 100vh;
   overflow: hidden;
 }
 
 header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
   background-color: #25252b;
   padding: 12px 20px;
   border-bottom: 1px solid #33333d;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
+}
+
+.mobile-sidebar-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  background: #2a2a32;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.mobile-sidebar-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #f0f0f0;
+  border-radius: 2px;
 }
 
 /* Container to group the icon and text */
@@ -28,6 +55,7 @@ header {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex: 1;
 }
 
 /* Header icon styling */
@@ -47,6 +75,7 @@ h1 {
   display: flex;
   flex: 1;
   height: calc(100vh - 50px);
+  min-height: 0;
 }
 
 .sidebar {
@@ -58,6 +87,7 @@ h1 {
   flex-direction: column;
   gap: 14px;
   overflow-y: auto;
+  flex-shrink: 0;
 }
 
 .panel {
@@ -182,6 +212,7 @@ canvas {
   top: 0;
   left: 0;
   cursor: default;
+  touch-action: none;
 }
 
 .hint {
@@ -215,4 +246,109 @@ canvas {
 
 .sidebar-github-link:hover {
   color: #ffffff;
+}
+
+@media (max-width: 900px) {
+  body {
+    height: auto;
+    min-height: 100vh;
+    overflow: auto;
+  }
+
+  .mobile-sidebar-toggle {
+    display: flex;
+  }
+
+  .container {
+    flex-direction: column;
+    height: auto;
+    min-height: calc(100vh - 50px);
+    transition: max-height 0.2s ease;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #33333d;
+    max-height: 2000px;
+    overflow: hidden;
+    transition: max-height 0.25s ease, padding 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+    opacity: 1;
+    transform: translateY(0);
+    display: flex;
+  }
+
+  .container.sidebar-collapsed .sidebar {
+    display: none;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  .workspace {
+    min-height: 52vh;
+  }
+
+  .canvas-container {
+    min-height: 420px;
+  }
+
+  .controls-row {
+    flex-wrap: wrap;
+  }
+
+  input[type="number"] {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 10px 14px;
+  }
+
+  .header-title-container {
+    gap: 8px;
+  }
+
+  h1 {
+    font-size: 1rem;
+  }
+
+  .sidebar {
+    padding: 12px;
+  }
+
+  .panel {
+    padding: 10px;
+  }
+
+  .frame-stepper {
+    gap: 8px;
+    padding: 6px 8px;
+  }
+
+  .frame-stepper span {
+    font-size: 0.72rem;
+    text-align: center;
+  }
+
+  .canvas-toolbar {
+    flex-wrap: wrap;
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .hint {
+    width: 100%;
+    font-size: 0.68rem;
+  }
+
+  .sidebar-github-link {
+    width: auto;
+    padding: 8px 10px 0;
+  }
 }

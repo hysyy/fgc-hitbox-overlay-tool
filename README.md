@@ -2,11 +2,9 @@
 
 This tool helps answer one of the most common questions in fighting games: "How big is this move's hitbox compared to this other one?"
 
-It is designed for comparing two images side by side on a single canvas, making it easier to align and measure hitbox overlays visually.
+Live website: https://hysyy.github.io/fgc-hitbox-overlay-tool/
 
-## What this app does
-
-The app lets you load a base image and an overlay image, then position, resize, and compare them directly on the same frame. This is especially useful for reviewing move hitboxes, attack ranges, and visual comparisons between characters, frames, or different attacks.
+It is designed for comparing two images on a single canvas, making it easier to align and measure hitboxes visually.
 
 ## Features
 
